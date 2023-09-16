@@ -7,6 +7,9 @@
 	"engines": {
 		"vscode": "^1.82.0"
 	},
+	"repository": {
+		"url": "https://github.com/norgor/vscode-capnp"
+	},
 	"main": "src/extension.js",
 	"categories": [
 		"Programming Languages"
