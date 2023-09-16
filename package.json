@@ -2,7 +2,7 @@
 	"name": "capnp",
 	"displayName": "Cap'n Proto",
 	"description": "Language support for Cap'n Proto!",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"icon": "images/icon.png",
 	"engines": {
 		"vscode": "^1.82.0"
