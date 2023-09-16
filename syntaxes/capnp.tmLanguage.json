@@ -3,6 +3,9 @@
 	"name": "Cap'n Proto",
 	"patterns": [
 		{
+			"include": "#comment"
+		},
+		{
 			"include": "#import"
 		},
 		{
@@ -16,6 +19,14 @@
 		}
 	],
 	"repository": {
+		"comment": {
+			"patterns": [
+				{
+					"name": "comment.line.capnp",
+					"match": "#.+"
+				}
+			]
+		},
 		"id": {
 			"patterns": [
 				{
