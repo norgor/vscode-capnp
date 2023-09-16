@@ -6,9 +6,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [0.1.1] - 2023-09-16
 ### Fixed
-- Syntax highlighting on comments.
-- Syntax highlighting on recursive types within methods.
-- 
+- Syntax highlighting for:
+	- Comments
+	- Recursive types within methods
+	- IDs on structs and enums
 
 ## [0.1.0] - 2023-09-16
 ### Added

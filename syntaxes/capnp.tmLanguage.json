@@ -75,7 +75,7 @@
 			"patterns": [
 				{
 					"name": "meta.struct.capnp",
-					"begin": "(enum)(?:\\s+(\\w+))?(\\s*{)?",
+					"begin": "(enum)(?:\\s+(\\w+))?(?:\\s+(@\\w+))?(\\s*{)?",
 					"end": "}",
 					"patterns": [
 						{
@@ -91,6 +91,13 @@
 						},
 						"2": {
 							"name": "entity.name.type.struct.capnp"
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#id"
+								}
+							]
 						}
 					}
 				}
@@ -100,7 +107,7 @@
 			"patterns": [
 				{
 					"name": "meta.struct.capnp",
-					"begin": "(struct)(?:\\s+(\\w+))?(\\s*{)?",
+					"begin": "(struct)(?:\\s+(\\w+))?(?:\\s+(@\\w+))?(\\s*{)?",
 					"end": "}",
 					"patterns": [
 						{
@@ -119,6 +126,13 @@
 						},
 						"2": {
 							"name": "entity.name.type.struct.capnp"
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#id"
+								}
+							]
 						}
 					}
 				}
