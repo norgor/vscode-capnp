@@ -75,7 +75,7 @@
 			"patterns": [
 				{
 					"name": "meta.struct.capnp",
-					"begin": "(enum)(?:\\s+(\\w+))?(\\s*{)?",
+					"begin": "(enum)(?:\\s+(\\w+))?(?:\\s+(@\\w+))?(\\s*{)?",
 					"end": "}",
 					"patterns": [
 						{
@@ -91,6 +91,13 @@
 						},
 						"2": {
 							"name": "entity.name.type.struct.capnp"
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#id"
+								}
+							]
 						}
 					}
 				}
@@ -100,7 +107,7 @@
 			"patterns": [
 				{
 					"name": "meta.struct.capnp",
-					"begin": "(struct)(?:\\s+(\\w+))?(\\s*{)?",
+					"begin": "(struct)(?:\\s+(\\w+))?(?:\\s+(@\\w+))?(\\s*{)?",
 					"end": "}",
 					"patterns": [
 						{
@@ -119,6 +126,13 @@
 						},
 						"2": {
 							"name": "entity.name.type.struct.capnp"
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#id"
+								}
+							]
 						}
 					}
 				}
@@ -254,19 +268,27 @@
 			"patterns": [
 				{
 					"name": "meta.method.args.capnp",
-					"match": "\\((\\w+)(?:\\s+(:[^,)]*))\\)",
-					"captures": {
-						"1": {
-							"name": "variable.name"
-						},
-						"2": {
-							"patterns": [
-								{
-									"include": "#typeref"
+					"begin": "\\(",
+					"end": "\\)",
+					"patterns": [
+						{
+							"name": "variable.name.capnp",
+							"match": "(\\w+)(?:\\s*(:[^)]*\\)))?",
+							"captures": {
+								"1": {
+									"name": "variable.name.capnp"
+								},
+								"2": {
+									"name": "meta.argvar",
+									"patterns": [
+										{
+											"include": "#typeref"
+										}
+									]
 								}
-							]
+							}
 						}
-					}
+					]
 				}
 			]
 		},
