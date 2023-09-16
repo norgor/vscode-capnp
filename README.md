@@ -10,7 +10,7 @@ The features that are supported can be found in the [Features](#features) sectio
 ### Code Diagnostics
 ![Image demonstrating code diagnostics](images/code-diagnostics.png)
 ### Commands
-![Gif demonstrating commands](images/commands.webm)
+![Gif demonstrating commands](images/commands.gif)
 
 ## Requirements
  * The [Cap'n Proto tools](https://capnproto.org/install.html) must be installed in order to use the code diagnostics feature.
