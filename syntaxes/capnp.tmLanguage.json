@@ -1,0 +1,275 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Cap'n Proto",
+	"patterns": [
+		{
+			"include": "#import"
+		},
+		{
+			"include": "#typedef"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#id"
+		}
+	],
+	"repository": {
+		"id": {
+			"patterns": [
+				{
+					"name": "constant.numeric.hex.capnp",
+					"match": "@0x[0-9A-Fa-f]+"
+				},
+				{
+					"name": "constant.numeric.dec.capnp",
+					"match": "@\\d+"
+				}
+			]
+		},
+		"import": {
+			"patterns": [
+				{
+					"name": "meta.import.capnp",
+					"match": "(using)(?:\\s+(\\w+))?(?:\\s*=)?(?:\\s*(import))",
+					"captures": {
+						"1": {
+							"name": "keyword.control.using.capnp"
+						},
+						"2": {
+							"name": "variable.name.capnp"
+						},
+						"3": {
+							"name": "keyword.control.import.capnp"
+						}
+					}
+				}
+			]
+		},
+		"typedef": {
+			"patterns": [
+				{
+					"include": "#struct"
+				},
+				{
+					"include": "#interface"
+				},
+				{
+					"include": "#enum"
+				}
+			]
+		},
+		"enum": {
+			"patterns": [
+				{
+					"name": "meta.struct.capnp",
+					"begin": "(enum)(?:\\s+(\\w+))?(\\s*{)?",
+					"end": "}",
+					"patterns": [
+						{
+							"include": "#union"
+						},
+						{
+							"include": "#field"
+						}
+					],
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type.class.capnp"
+						},
+						"2": {
+							"name": "entity.name.type.struct.capnp"
+						}
+					}
+				}
+			]
+		},
+		"struct": {
+			"patterns": [
+				{
+					"name": "meta.struct.capnp",
+					"begin": "(struct)(?:\\s+(\\w+))?(\\s*{)?",
+					"end": "}",
+					"patterns": [
+						{
+							"include": "#typedef"
+						},
+						{
+							"include": "#union"
+						},
+						{
+							"include": "#field"
+						}
+					],
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type.class.capnp"
+						},
+						"2": {
+							"name": "entity.name.type.struct.capnp"
+						}
+					}
+				}
+			]
+		},
+		"union": {
+			"patterns": [
+				{
+					"name": "meta.union.capnp",
+					"begin": "(union)(\\s*{)",
+					"patterns": [
+						{
+							"include": "#field"
+						}
+					],
+					"end": "}",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type.enum.capnp"
+						}
+					}
+				}
+			]
+		},
+		"interface": {
+			"patterns": [
+				{
+					"name": "meta.interface.capnp",
+					"begin": "(interface)(?:\\s+(\\w+))?(?:\\s+(@\\w+))?\\s*{?",
+					"end": "}",
+					"patterns": [
+						{
+							"include": "#method"
+						}
+					],
+					"captures": {
+						"1": {
+							"name": "storage.type.interface.capnp"
+						},
+						"2": {
+							"name": "entity.name.type.interface.capnp"
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#id"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"field": {
+			"patterns": [
+				{
+					"name": "meta.field.capnp",
+					"match": "(\\w+)(?:\\s*(@\\w+))?(?:\\s*(:[\\w(),\\s]*))?",
+					"captures": {
+						"1": {
+							"name": "variable.struct.field.capnp"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#id"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#typeref"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"typeref": {
+			"patterns": [
+				{
+					"name": "entity.name.type.class",
+					"match": ":?([\\w]*)(?:\\((([^,\\s]*)\\s*,?)*\\))?",
+					"captures": {
+						"3": {
+							"patterns": [
+								{
+									"include": "#typeref"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"method": {
+			"patterns": [
+				{
+					"name": "meta.method.capnp",
+					"match": "(\\w+)(?:\\s*(@\\w*))(?:\\s*(\\([^)]*\\)))?(?:\\s*->)?(?:\\s*(\\([^)]*\\)))",
+					"captures": {
+						"1": {
+							"name": "entity.name.function.member.capnp"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#id"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#methodArgs"
+								}
+							]
+						},
+						"4": {
+							"patterns": [
+								{
+									"include": "#methodArgs"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"methodArgs": {
+			"patterns": [
+				{
+					"name": "meta.method.args.capnp",
+					"match": "\\((\\w+)(?:\\s+(:[^,)]*))\\)",
+					"captures": {
+						"1": {
+							"name": "variable.name"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#typeref"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.capnp",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.capnp",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.capnp"
+}

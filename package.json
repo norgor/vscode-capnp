@@ -1,0 +1,51 @@
+{
+	"name": "capnp",
+	"displayName": "Cap'n Proto",
+	"description": "Language support for Cap'n Proto!",
+	"version": "0.1.0",
+	"icon": "images/icon.png",
+	"engines": {
+		"vscode": "^1.82.0"
+	},
+	"main": "src/extension.js",
+	"categories": [
+		"Programming Languages"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "capnp",
+				"aliases": [
+					"Cap'n Proto",
+					"capnp"
+				],
+				"extensions": [
+					".capnp"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "capnp",
+				"scopeName": "source.capnp",
+				"path": "./syntaxes/capnp.tmLanguage.json"
+			}
+		],
+		"commands": [
+			{
+				"category": "Cap'n Proto",
+				"command": "capnp.generateUid",
+				"title": "Generate Unique ID"
+			}
+		],
+		"menus": {
+			"commandPalette": [
+				{
+					"command": "capnp.generateUid",
+					"when": "editorLangId == capnp"
+				}
+			]
+		}
+	}
+}
